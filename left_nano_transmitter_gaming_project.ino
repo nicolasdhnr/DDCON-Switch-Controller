@@ -16,7 +16,7 @@ void setup() {
   radio.begin();
   radio.openWritingPipe(addresses[1]); // 00002
   radio.openReadingPipe(1, addresses[0]); // 00001
-  radio.setPALevel(RF24_PA_MAX);
+  radio.setPALevel(RF24_PA_MIN);
 
   for (int i = 0; i < 10; i++) {
     pinMode(L_pins[i], INPUT);
