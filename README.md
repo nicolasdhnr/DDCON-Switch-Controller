@@ -4,6 +4,9 @@ Through interviews with Duchenne United Gaming, Duchenne Family Support Group an
 A full controller setup was manufactured including a combination of 3D printing and off the shelf products where applicable. A separate model demonstrated working code and electrical components and was combined with the manufactured setup to produce the final controller. Using 3 Arduinos and Wi-Fi modules, we produced a working prototype based on our specifications that completely emulates a Nintendo Switch Joycon (The controller for Nintendo Switch), in addition to a wrist rest in line with our user reqwuirements. 
 
 Imperial College London 2nd Year Bioengineer-designed Nintendo Switch Controller Code
-<p align="Center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wG0IQJdxI7U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
+
+
+
+
+https://user-images.githubusercontent.com/90317020/173458548-cd6ede17-1831-44f0-b5bd-a4640d253b21.mp4
+
