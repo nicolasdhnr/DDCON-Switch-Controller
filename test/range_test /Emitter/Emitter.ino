@@ -150,13 +150,13 @@ void loop()  {
   counter = counter + 1;
   
   if ((counter % 50) == 0){
-    val = end_timer - start_timer;
-    EEPROM.put(addr, val);
+    val = end_timer - start_timer; // Find the time elapsed during code execution
+    EEPROM.put(addr, val); //Store the data into the EEPROM
     
-    addr = addr + 1;
+    addr = addr + 1; // Move to the next memory address
 
     if (addr == EEPROM.length()) {
-    addr = 0;
+    addr = 0; // If the EEPROM is filled, return to the start of the of the code. 
 
 
   }
