@@ -6,7 +6,5 @@ A full controller setup was manufactured including a combination of 3D printing 
 Imperial College London 2nd Year Bioengineer-designed Nintendo Switch Controller Code
 
 
-
-
-https://user-images.githubusercontent.com/90317020/173458548-cd6ede17-1831-44f0-b5bd-a4640d253b21.mp4
+https://user-images.githubusercontent.com/90317020/173458812-daf83830-bb05-45b9-a757-dbe480953c16.mp4
 
