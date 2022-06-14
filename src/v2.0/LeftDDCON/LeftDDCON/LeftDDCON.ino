@@ -1,5 +1,6 @@
   /* This code is to be used on the Arduino acting as Transmitter.
    *  Required hardware is 2 Joysticks.
+   *  **************************LEFT JOYSTICK*******************
    */
   
   #include <SPI.h>  
@@ -7,7 +8,7 @@
   #include <DDCONlib.h>
   
   //Define parameters needed for radio
-  RF24 myRadio (11, 12);
+  RF24 myRadio (2, SS);
   byte addresses[][6] = {"0"};
   //================== Timer Set up =============================
 int counter = 0;
@@ -24,11 +25,6 @@ Buttons button;
       
 switchCommand current;
 
-
-//Tool Functions
-
-
-  const int A = 2; 
   const int VRx = A0;
   const int VRy = A1;
   //============ Radio Setup ===========
@@ -37,7 +33,7 @@ switchCommand current;
   
   void radioSetup(){
      myRadio.begin();  
-      myRadio.setChannel(0x34); 
+      myRadio.setChannel(125); // 
       myRadio.setRetries(rDelay,rNum);
       myRadio.setPALevel(RF24_PA_LOW);
       myRadio.setDataRate( RF24_2MBPS ) ; 
@@ -54,29 +50,33 @@ switchCommand current;
       
       pinMode(VRx, INPUT);
       pinMode(VRy, INPUT);
-      buttonSetup();
+
+      //Set button Pins to INPUT_PULLUP, allowing the use of the built-in 20k resistors. 
+      leftButtonSetup();
       
       Serial.begin(9600);
-    delay(1000);
-    randomSeed(analogRead(0));
+      delay(1000);
+
+      //Random seed for the random delay.
+      randomSeed(analogRead(0));
 
     // Set up the radio communication 
     radioSetup();
 }
 
 void loop(){
-  delay(20);
+  delay(50);
   //Left Joystick 
   joystick.xPos = map(analogRead(VRx), 0, 1023, 0, 255);
   joystick.yPos = map(analogRead(VRy), 0, 1023, 0, 255);
 
  
-  button = readPins();
+  button = readLeftPins();
   
-  data.id = 1;
+  data.id = 2;
   data.joystick = joystick;
   data.buttons = button;
-    
+   printRightPackageInfo(data);
 if (!myRadio.write(&data, sizeof(data))){  //send data and remember it will retry if it fails
     delay(random(5, 20)); //as another back up, delay for a random amount of time and try again
     if (!myRadio.write(&myRadio, sizeof(myRadio))){

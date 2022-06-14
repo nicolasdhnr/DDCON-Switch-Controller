@@ -1,15 +1,17 @@
   /* This code is to be used on the Arduino acting as Transmitter.
    *  Required hardware is 2 Joysticks.
+   *  **************************LEFT JOYSTICK*******************
    */
+
+#include <SPI.h>  
+#include "RF24.h"
+#include <DDCONlib.h>
   
-  #include <SPI.h>  
-  #include "RF24.h"
-  #include <DDCONlib.h>
+//Define parameters needed for radio
+RF24 myRadio (2, SS);
+byte addresses[][6] = {"0"};
   
-  //Define parameters needed for radio
-  RF24 myRadio (11, 12);
-  byte addresses[][6] = {"0"};
-  //================== Timer Set up =============================
+//================== Timer Set up =============================
 int counter = 0;
 unsigned long val;
 int addr = 0;
@@ -24,20 +26,17 @@ Buttons button;
       
 switchCommand current;
 
-
-//Tool Functions
-
-
-  const int A = 2; 
   const int VRx = A0;
   const int VRy = A1;
   //============ Radio Setup ===========
-  const uint8_t rDelay = 7; //this is based on 250us increments, 0 is 250us so 7 is 2 ms
+
+  // Define the error correction Parameters that are built into the DDCON.  
+  const uint8_t rDelay = 2; //this is based on 250us increments, 0 is 250us so 7 is 2 ms
   const uint8_t rNum = 5; //number of retries that will be attempted 
   
   void radioSetup(){
      myRadio.begin();  
-      myRadio.setChannel(0x34); 
+      myRadio.setChannel(125); 
       myRadio.setRetries(rDelay,rNum);
       myRadio.setPALevel(RF24_PA_LOW);
       myRadio.setDataRate( RF24_2MBPS ) ; 
@@ -46,7 +45,8 @@ switchCommand current;
       myRadio.stopListening();
   }
   
-      
+
+
   
   void setup(){
       
@@ -54,7 +54,7 @@ switchCommand current;
       
       pinMode(VRx, INPUT);
       pinMode(VRy, INPUT);
-      buttonSetup();
+      rightButtonSetup();
       
       Serial.begin(9600);
     delay(1000);
@@ -64,6 +64,7 @@ switchCommand current;
     radioSetup();
 }
 
+
 void loop(){
   delay(20);
   //Left Joystick 
@@ -71,12 +72,15 @@ void loop(){
   joystick.yPos = map(analogRead(VRy), 0, 1023, 0, 255);
 
  
-  button = readPins();
+  button = readRightPins();
   
   data.id = 1;
   data.joystick = joystick;
   data.buttons = button;
-    
+  
+  printRightPackageInfo(data);
+  
+   Serial.println(data.buttons.A);
 if (!myRadio.write(&data, sizeof(data))){  //send data and remember it will retry if it fails
     delay(random(5, 20)); //as another back up, delay for a random amount of time and try again
     if (!myRadio.write(&myRadio, sizeof(myRadio))){
