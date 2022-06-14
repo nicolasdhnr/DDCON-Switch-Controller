@@ -94,6 +94,7 @@ void loop()  {
   }
   delay(5);
 
+<<<<<<< HEAD
 //  unsigned long end_timer = millis();
 //  counter = counter + 1;
 //  
@@ -108,6 +109,19 @@ void loop()  {
 //
 //
 //  }
+=======
+  unsigned long end_timer = millis();
+  counter = counter + 1;
+  
+  if ((counter % 50) == 0){
+    val = end_timer - start_timer; // Find the time elapsed during code execution
+    EEPROM.put(addr, val); //Store the data into the EEPROM
+    
+    addr = addr + 1; // Move to the next memory address
+
+    if (addr == EEPROM.length()) {
+    addr = 0; // If the EEPROM is filled, return to the start of the of the code. 
+>>>>>>> 5dd3a456e15ad76c2142c7b316e08c8cc7eae5c7
 
   
 }
