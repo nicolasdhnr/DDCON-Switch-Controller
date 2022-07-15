@@ -26,7 +26,15 @@ https://user-images.githubusercontent.com/90317020/173458812-daf83830-bb05-45b9-
 ## Key Features
 **Design Features**
 
+![DDCON Design](https://i.ibb.co/1qCJqX9/DDCON.png "Overview of the Controller Design")
 
+**Hardware** 
+
+* 2 Arduino Micros 
+* 1 Arduino Leonardo 
+* 3 nRF24L01 Wireless Transceiver Modules
+* 2 Portable Chargers
+* 16 Cherry MX Mechanical Switches
 
 ## How To Use
 
@@ -42,11 +50,11 @@ Nicolas Dehandschoewercker \
 Sonya Kalsi \
 Kevin Li \
 Fjona Lutaj \
-Toni Omitogun \  
+Toni Omitogun  <br>
 Matthieu Pallud \
 Sakshi Singh \
 Kornel Takacs \
-Elliott Wong\
+Elliott Wong <br>
 
 A special thanks to Dr. Maria Parkes (Imperial College London), for her help as a supervisor of this project. 
 
